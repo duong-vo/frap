@@ -1,0 +1,7 @@
+setup.py
+frap.egg-info/PKG-INFO
+frap.egg-info/SOURCES.txt
+frap.egg-info/dependency_links.txt
+frap.egg-info/entry_points.txt
+frap.egg-info/requires.txt
+frap.egg-info/top_level.txt
