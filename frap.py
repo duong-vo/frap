@@ -1,5 +1,6 @@
 import os
 import click
+import questionary
 
 @click.group()
 def frap():
@@ -15,18 +16,22 @@ def history(count, r):
     home_directory = os.path.expanduser('~')
     command_tracker = 0
     if (r):
+        print("Displaying commands from most recent")
         for line in reversed(list(open(home_directory + "/.bash_history"))):
             if command_tracker == count:
                 print(f"you have more than {command_tracker} commands, continue?")
                 break
-            print(line.rstrip())
+            command = line.rstrip()
+            print(command)
             command_tracker = command_tracker + 1
     else:
+        print("Displaying commands from least recent")
         for line in list(open(home_directory + "/.bash_history")):
             if command_tracker == count:
                 print(f"you have more than {command_tracker} commands, continue?")
                 break
-            print(line.rstrip())
+            command = line.rstrip()
+            print(command)
             command_tracker = command_tracker + 1
 
 
@@ -35,12 +40,26 @@ def history(count, r):
 def save(command):
     if (command):
         home_directory = os.path.expanduser('~')
-        with open(home_directory + "\custom_history.txt", 'w') as f:
-            f.write(command)
+        with open(home_directory + "\custom_history.txt", 'a') as f:
+            f.write(command + "\n")
             f.close()
             print(f'Saved {command}!')
     else:
         print("Please provide an argument!")
         
+@click.command(name='window', help="Display an interactive of your saved command")
+def window():
+    home_directory = os.path.expanduser('~')
+    saved_commands = []
+    for line in reversed(list(open(home_directory + "\custom_history.txt"))):
+            command = line.rstrip()
+            if (command):
+                saved_commands.append(command)
+    chosen_command = questionary.select("Choose saved your commands to execute:", 
+                                                choices=saved_commands).ask()
+    os.system(chosen_command)
+
+
 frap.add_command(history)
 frap.add_command(save)
+frap.add_command(window)
