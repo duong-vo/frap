@@ -25,7 +25,7 @@ jobs:
       with:
         python-version: '3.x'
     - uses: casperdcl/deploy-pypi@v2
-        with:
-          password: ${{ secrets.PYPI_TOKEN }}
-          pip: wheel -w dist/ --no-deps .
+      with:
+        password: ${{ secrets.PYPI_TOKEN }}
+        pip: wheel -w dist/ --no-deps .
 
