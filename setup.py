@@ -3,6 +3,9 @@ from setuptools import setup, find_packages
 setup(
     name='frap',
     packages=find_packages(),
+    description=""" The description of the package   """,
+    long_description_content_type="text/markdown",
+    long_description=README,
     install_requires=[
         "click"
     ],
