@@ -3,3 +3,5 @@
 <p align="center"> A terminal commands manager that will make your life easier </p>
 </p>
 
+<p> TESTING THIS BRANCH </p>
+
